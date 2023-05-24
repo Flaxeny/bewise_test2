@@ -19,7 +19,8 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = os.environ.get("DB_PASS")
     POSTGRES_HOST: str = os.environ.get("DB_HOST")
     POSTGRES_PORT: str = os.environ.get("DB_PORT")
-    POSTGRES_DRIVERNAME : str = os.environ.get("DB_DRIVERNAME")
+    POSTGRES_DRIVERNAME: str = os.environ.get("DB_DRIVERNAME")
+    PORT: int = os.environ.get("PORT", 8080)
 
 
 settings = Settings()
@@ -27,7 +28,7 @@ settings = Settings()
 DATABASE_URL = f'{settings.POSTGRES_DRIVERNAME}://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}' \
                f'@{settings.POSTGRES_HOST}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}'
 
-audio_url = os.environ.get("AUDIO_URL", f"http://localhost:{config.port}")
+audio_url = os.environ.get("AUDIO_URL", f"http://localhost:{Settings.PORT}")
 
 prefix_task2 = os.environ.get("PREFIX_TASK2", "/task2")
 
