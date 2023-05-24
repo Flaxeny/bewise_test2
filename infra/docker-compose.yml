@@ -1,0 +1,26 @@
+version: '3.10'
+services:
+
+  db:
+    image: postgres:15.0-alpine
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+    ports:
+      - 5433:5432
+    env_file:
+      - ../.env
+
+  fastapi_app:
+    build:
+      context: ../
+    restart: on-failure
+    command: bash -c "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000"
+    env_file:
+      - ../.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+volumes:
+  dbdata:
