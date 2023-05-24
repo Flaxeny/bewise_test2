@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str = os.environ.get("DB_HOST")
     POSTGRES_PORT: str = os.environ.get("DB_PORT")
     POSTGRES_DRIVERNAME: str = os.environ.get("DB_DRIVERNAME")
-    PORT: int = os.environ.get("PORT", 8080)
+    PORT: int = os.environ.get("PORT")
+    HOST: str = os.environ.get("HOST")
 
 
 settings = Settings()
